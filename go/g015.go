@@ -11,7 +11,6 @@ func threeSum(nums []int) [][]int {
 			continue
 		}
 		l, r := i+1, len(nums)-1
-		//-1 0 0 1
 		for l < r {
 			s := nums[l] + nums[i] + nums[r]
 
