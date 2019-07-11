@@ -1,4 +1,4 @@
-package _go
+package main
 
 func trap(height []int) int {
 	if len(height) < 1 {
@@ -42,39 +42,30 @@ func check(values [][]int) [][]int {
 			for i, _ := range array {
 				result[i] = array[len(array)-i-1]
 			}
-
 			values[i] = []int{0}
 		}
-
 		for _, v := range getValues(result) {
 			values = append(values, v)
 		}
-
 	}
-
 	return values
 }
 
 func calculateTotal(arrs [][]int) (total int) {
-
 	for _, array := range arrs {
-
 		if array[0] < array[len(array)-1] {
 			for i := 1; i < len(array)-1; i++ {
 				if array[0]-array[i] > 0 {
 					total += array[0] - array[i]
 				}
-
 			}
 		} else {
 			for i := 1; i < len(array)-1; i++ {
 				if array[len(array)-1]-array[i] > 0 {
 					total += array[len(array)-1] - array[i]
 				}
-
 			}
 		}
-
 	}
 	return
 }

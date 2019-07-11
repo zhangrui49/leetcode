@@ -1,7 +1,5 @@
-package main;
+package javal;
 
-
-import com.sun.xml.internal.ws.util.StringUtils;
 
 public class J032 {
 

@@ -1,4 +1,4 @@
-package _go
+package main
 
 import "fmt"
 
@@ -10,7 +10,7 @@ import "fmt"
 //
 //}
 
-func main() {
+func test() {
 	fmt.Print(getAll([]int{2, 7, 11, 15, 16}, 4))
 }
 

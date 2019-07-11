@@ -1,4 +1,4 @@
-package java;
+package javal;
 
 public class J003 {
 

@@ -1,4 +1,4 @@
-package _go
+package main
 
 func lengthOfLongestSubstring(s string) int {
 	//hash := make([]int, 256)
@@ -14,6 +14,5 @@ func lengthOfLongestSubstring(s string) int {
 			max = l
 		}
 	}
-
 	return max
 }

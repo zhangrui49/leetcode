@@ -1,4 +1,4 @@
-package java;
+package javal;
 
 public class J002 {
     public static void main(String[] args) {
