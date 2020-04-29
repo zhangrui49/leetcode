@@ -13,6 +13,10 @@ func isPalindrome(x int) bool {
 	//return IsPalindrome(strconv.Itoa(x))
 }
 
+/*
+@param s 字符串
+判断回文
+*/
 func IsPalindrome(s string) bool {
 	size := len(s)
 
