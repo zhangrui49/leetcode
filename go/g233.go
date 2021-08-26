@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-08-26 14:32:46
+ * @LastEditTime: 2021-08-26 14:48:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /tunny/home/pateo/src/leetcode/go/g233.go
+ */
 package main
 
 import (
