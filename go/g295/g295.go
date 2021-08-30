@@ -1,15 +1,16 @@
+//数据流的中位数
 package g295
 
-//数据流的中位数
 type MedianFinder struct {
-	Median *ListNode
+	Median *MyListNode
 	Count  int
+	Direc  int
 }
 
-type ListNode struct {
+type MyListNode struct {
 	Val  int
-	Next *ListNode
-	Prev *ListNode
+	Next *MyListNode
+	Prev *MyListNode
 }
 
 func Constructor() MedianFinder {
@@ -18,79 +19,112 @@ func Constructor() MedianFinder {
 	return medianFinder
 }
 
-func (listNode *ListNode) appendNext(list *ListNode) {
-	next := listNode.Next
+func (MyListNode *MyListNode) appendNext(list *MyListNode) {
+	next := MyListNode.Next
 	if next == nil {
-		listNode.Next = list
+		MyListNode.Next = list
+		list.Prev = MyListNode
 	} else {
-		listNode.Next = list
-		list.Prev = listNode
+		MyListNode.Next = list
+		list.Prev = MyListNode
 		list.Next = next
+		next.Prev = list
 	}
 }
 
-func (listNode *ListNode) appendPrev(list *ListNode) {
-	prev := listNode.Next
+func (MyListNode *MyListNode) appendPrev(list *MyListNode) {
+	prev := MyListNode.Prev
 	if prev == nil {
-		listNode.Prev = list
+		MyListNode.Prev = list
+		list.Next = MyListNode
 	} else {
-		listNode.Prev = list
+		MyListNode.Prev = list
+		list.Next = MyListNode
+
 		list.Prev = prev
-		list.Next = listNode
+		prev.Next = list
 	}
 }
 
 func (this *MedianFinder) AddNum(num int) {
-	var list ListNode
+	var list = new(MyListNode)
 	list.Val = num
 	this.Count++
 	if this.Count == 1 {
-		this.Median = &list
+		this.Median = list
 		return
 	}
 
 	if num >= this.Median.Val {
 		next := this.Median.Next
 		if next == nil {
-			this.Median.appendNext(&list)
+			this.Median.appendNext(list)
 		} else {
 			for next != nil {
 				if next.Val <= num {
-					next = next.Next
+					tempNext := next.Next
+					if tempNext == nil {
+						break
+					}
+					next = tempNext
 					continue
 				}
 				break
 			}
-			next.appendPrev(&list)
+			if next.Val <= list.Val {
+				next.appendNext(list)
+			} else {
+				next.appendPrev(list)
+			}
+
 		}
-
-		this.Median = this.Median.Next
-
+		if this.Count&1 == 0 || this.Direc == 1 {
+			this.Median = this.Median.Next
+		}
+		this.Direc = 0
 	} else {
 
 		prev := this.Median.Prev
 		if prev == nil {
-			this.Median.appendPrev(&list)
+			this.Median.appendPrev(list)
 		} else {
 			for prev != nil {
 				if prev.Val >= num {
-					prev = prev.Prev
+					tempPrev := prev.Prev
+					if tempPrev == nil {
+						break
+					}
+					prev = tempPrev
 					continue
 				}
 				break
 			}
-			prev.appendNext(&list)
+			if prev.Val <= list.Val {
+				prev.appendNext(list)
+			} else {
+				prev.appendPrev(list)
+			}
+
 		}
-		this.Median = this.Median.Prev
+		if this.Count&1 == 0 || this.Direc == 0 {
+			this.Median = this.Median.Prev
+		}
+		this.Direc = 1
 	}
 
 }
 
 func (this *MedianFinder) FindMedian() float64 {
 	if this.Count&1 == 1 {
-		return float64(this.Median.Val)
-	} else {
 
-		return float64((this.Median.Val + this.Median.Next.Val)) / 2.0
+		return float64(this.Median.Val)
+
+	} else {
+		if this.Direc == 1 {
+			return float64((this.Median.Val + this.Median.Next.Val)) / 2.0
+		} else {
+			return float64((this.Median.Val + this.Median.Prev.Val)) / 2.0
+		}
+
 	}
 }
