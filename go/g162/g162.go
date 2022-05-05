@@ -26,7 +26,6 @@ func findPeakElement(nums []int) int {
 	}
 
 	//边界
-	if 
 
 	return -1
 }

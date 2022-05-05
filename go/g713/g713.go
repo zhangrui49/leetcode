@@ -33,3 +33,23 @@ func numSubarrayProductLessThanK(nums []int, k int) int {
 
 	return count
 }
+
+func numSubarrayProductLessThanKV2(nums []int, k int) int {
+	count, left, right, mul := 0, 0, 0, 1
+	length := len(nums)
+
+	if k <= 1 {
+		return count
+	}
+	for right < length {
+		mul = mul * nums[right]
+		for mul >= k {
+			mul = mul / nums[left]
+			left++
+		}
+		count = count + right - left + 1
+		right++
+	}
+
+	return count
+}
