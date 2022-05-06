@@ -49,7 +49,7 @@ func Test_numSubarrayProductLessThanKV2(t *testing.T) {
 		{
 			name: "test2",
 			args: args{
-				nums: []int{57, 44, 92, 28, 66, 60, 37, 33, 52, 38, 29, 76, 8, 75, 22},
+				nums: []int{1000, 100},
 				k:    18,
 			},
 			want: 1,

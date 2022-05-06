@@ -1,4 +1,4 @@
-package g70
+package g070
 
 import "testing"
 
