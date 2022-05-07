@@ -5,22 +5,46 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil {
-		return l2
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+	if list1 == nil {
+		return list2
 	}
+	if list2 == nil {
+		return list1
+	}
+	if list1.Val <= list2.Val {
+		list1.Next = mergeTwoLists(list1.Next, list2)
+		return list1
+	} else if list1.Val > list2.Val {
+		list2.Next = mergeTwoLists(list1, list2.Next)
+		return list2
+	}
+	return nil
+}
 
-	if l2 == nil {
-		return l1
+func mergeTwoListsV2(list1 *ListNode, list2 *ListNode) *ListNode {
+	if list1 == nil {
+		return list2
 	}
-
-	node := &ListNode{}
-	if l1.Val <= l2.Val {
-		node = l1
-		node.Next = mergeTwoLists(l1.Next, l2)
-	} else if l1.Val > l2.Val {
-		node = l2
-		node.Next = mergeTwoLists(l1, l2.Next)
+	if list2 == nil {
+		return list1
 	}
-	return node
+	head := &ListNode{}
+	var node = head
+	for list1 != nil && list2 != nil {
+		if list1.Val <= list2.Val {
+			node.Next = list1
+			list1 = list1.Next
+		} else {
+			node.Next = list2
+			list2 = list2.Next
+		}
+		node = node.Next
+	}
+	if list1 == nil {
+		node.Next = list2
+	} else {
+		node.Next = list1
+	}
+	return head.Next
 }

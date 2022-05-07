@@ -12,13 +12,13 @@ func TestMergeTwoLists(t *testing.T) {
 	list2.Val = 1
 	list2.Next = &ListNode{3, &ListNode{4, nil}}
 
-	result := mergeTwoLists(list1, list2)
+	result := mergeTwoListsV2(list1, list2)
 	next := result
 	for {
 		if next == nil {
 			break
 		}
-		t.Log(next.Val)
+		t.Error(next.Val)
 		next = next.Next
 	}
 }
