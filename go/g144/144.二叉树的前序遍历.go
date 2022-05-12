@@ -101,12 +101,12 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-//go数组值传递，不行
-func preorder(root *TreeNode, r []int) {
+//go数组值传递
+func preorder(root *TreeNode, r *[]int) {
 	if root == nil {
 		return
 	}
-	r = append(r, root.Val)
+	*r = append(*r, root.Val)
 	preorder(root.Left, r)
 	preorder(root.Right, r)
 }
