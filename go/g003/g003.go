@@ -34,6 +34,21 @@ func lengthOfLongestSubstringV2(s string) int {
 	return max
 }
 
+func lengthOfLongestSubstringV3(s string) int {
+	cache := make(map[byte]int)
+	left, max, length := 0, 0, len(s)
+	for i := 0; i < length; i++ {
+		c := s[i]
+		if v, ok := cache[c]; ok {
+			left = getMax(left, v+1)
+		}
+		cache[c] = i
+		max = getMax(max, i-left+1)
+	}
+
+	return max
+}
+
 func getMax(x, y int) int {
 
 	if x > y {
