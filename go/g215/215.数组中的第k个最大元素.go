@@ -54,8 +54,37 @@ func findKthLargest(nums []int, k int) int {
 	return nums[len(nums)-k]
 }
 
+//快排整一波
 func findKthLargestV2(nums []int, k int) int {
-	sort.Ints(nums)
+
+	var quickSort func(int, int)
+	quickSort = func(low, high int) {
+		if low >= high {
+			return
+		}
+
+		left, right := low, high
+
+		pivot := nums[(left+right)/2]
+
+		for left <= right {
+			for pivot > nums[left] {
+				left++
+			}
+			for pivot < nums[right] {
+				right--
+			}
+
+			if left <= right {
+				nums[left], nums[right] = nums[right], nums[left]
+				left++
+				right--
+			}
+		}
+		quickSort(low, right)
+		quickSort(left, high)
+	}
+	quickSort(0, len(nums)-1)
 	return nums[len(nums)-k]
 }
 
