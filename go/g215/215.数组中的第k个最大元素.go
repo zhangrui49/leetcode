@@ -149,6 +149,33 @@ func findKthLargestV6(nums []int, k int) int {
 	return nums[len(nums)-k]
 }
 
+func buildMaxHeap(arr []int, arrLen int) {
+	for i := arrLen / 2; i >= 0; i-- {
+		heapify(arr, i, arrLen)
+	}
+}
+
+func heapify(arr []int, i, arrLen int) {
+	left := 2*i + 1
+	right := 2*i + 2
+	maxI := i
+	if left < arrLen && arr[left] > arr[maxI] {
+		maxI = left
+	}
+	if right < arrLen && arr[right] > arr[maxI] {
+		maxI = right
+	}
+	if maxI != i {
+		swap(arr, i, maxI)
+		heapify(arr, maxI, arrLen)
+	}
+
+}
+
+func swap(arr []int, i, j int) {
+	arr[i], arr[j] = arr[j], arr[i]
+}
+
 //希尔排序(优化版插入排序)
 func findKthLargestV7(nums []int, k int) int {
 	length := len(nums)
