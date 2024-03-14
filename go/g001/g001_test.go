@@ -5,5 +5,5 @@ import (
 )
 
 func TestTwoSum(t *testing.T) {
-	t.Log(TwoSum([]int{2, 7, 11, 15}, 9))
+	t.Log(TwoSum([]int{1, 3, 5, 6, 8}, 9))
 }

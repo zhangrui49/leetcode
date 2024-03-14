@@ -129,3 +129,40 @@ func preorderTraversalV2(root *TreeNode) []int {
 
 	return r
 }
+
+//用递归模拟栈调用
+func preorderTraversalV3(root *TreeNode) []int {
+	r := []int{}
+	stack := &stack{}
+	stack.push(root)
+	for len(stack.data) != 0 {
+		node := stack.pop()
+		if node != nil {
+			r = append(r, node.Val)
+			if node.Right != nil {
+				stack.push(node.Right)
+			}
+			if node.Left != nil {
+				stack.push(node.Left)
+			}
+		}
+	}
+	return r
+}
+
+type stack struct {
+	data []*TreeNode
+}
+
+func (s *stack) pop() *TreeNode {
+	if len(s.data) == 0 {
+		return nil
+	}
+	t := s.data[len(s.data)-1]
+	s.data = s.data[:len(s.data)-1]
+	return t
+}
+
+func (s *stack) push(t *TreeNode) {
+	s.data = append(s.data, t)
+}

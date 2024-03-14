@@ -4,6 +4,6 @@ import (
 	"testing"
 )
 
-func TestLengthOfLongestSubstring(t *testing.T) {
-	t.Error(lengthOfLongestSubstringV3("abba"))
+func TestLengthOfLongestSubstringV3(t *testing.T) {
+	t.Log(lengthOfLongestSubstringV3("abba"))
 }
